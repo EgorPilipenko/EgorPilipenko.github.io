@@ -32,10 +32,14 @@ function gotData(data){
 
 
 function submitData(){
+	if(inputPassword.value==''||inputLogin.value==''){
+		return;
+	}
 	let data = {
 		login: inputLogin.value,
 		password: inputPassword.value
 	}
+
 
 ref.push(data);
 }		
