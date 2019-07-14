@@ -39,9 +39,9 @@ function submitData(){
 		login: inputLogin.value,
 		password: inputPassword.value
 	}
-
-
-ref.push(data);
+	ref.push(data);
+	document.getElementById('inputLogin').value='';
+	document.getElementById('inputPassword').value='';
 }		
 
 function errData(err){
