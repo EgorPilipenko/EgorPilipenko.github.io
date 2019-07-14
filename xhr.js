@@ -1,24 +1,46 @@
-(function(){
-	 // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyCrLVJRMkrk8061e2yzLdoPAeWd6zrThFk",
-    authDomain: "geeg-solution.firebaseapp.com",
-    databaseURL: "https://geeg-solution.firebaseio.com",
-    projectId: "geeg-solution",
-    storageBucket: "geeg-solution.appspot.com",
-    messagingSenderId: "1037948664054",
-    appId: "1:1037948664054:web:1ebce21d42d484d8"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+let inputLogin = document.getElementById('inputLogin');
+let inputPassword =document.getElementById('inputPassword');
 
-const preObject = document.getElementById('object')
+const database = firebase.database();
+
+let ref = database.ref('people');
+
+ref.on('value', gotData , errData);
+
+function gotData(data){
+	let peopleListings = document.querySelectorAll(".LoginData");
+	for(let i = 0; i<peopleListings.length; i++){
+		peopleListings[i].remove();
+	}
+	let persons = data.val();
+	let keys=Object.keys(persons);
+	for( let i = 0; i<keys.length; i++ ){
+		let k = keys[i];
+		let login= persons[k].login;
+		let password = persons[k].password;
+		let tbl= document.getElementById('myTable');
+		let row= tbl.insertRow();
+		let cell1=row.insertCell();
+		let cell2=row.insertCell();
+		cell1.setAttribute("class", "LoginData");
+		cell2.setAttribute("class", "LoginData");
+		cell1.innerHTML=login;
+		cell2.innerHTML=password;
+
+	}
+} 
 
 
-const dbRefObject = firebase.database().ref().child('object');
+function submitData(){
+	let data = {
+		login: inputLogin.value,
+		password: inputPassword.value
+	}
 
-dbRefObject.on('value', snap => console.log(snap.val()));
+ref.push(data);
+}		
 
-
-
-}());
+function errData(err){
+	console.log('Error!');
+	console.log(err);
+} 
