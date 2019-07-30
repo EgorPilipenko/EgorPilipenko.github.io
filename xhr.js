@@ -2,7 +2,7 @@ let inputLogin = document.getElementById('inputLogin');
 let inputPassword =document.getElementById('inputPassword');
 
 const database = firebase.database();
-
+//TODO Test
 let ref = database.ref('people');
 
 ref.on('value', gotData , errData);
@@ -38,7 +38,7 @@ function submitData(){
 	let data = {
 		login: inputLogin.value,
 		password: inputPassword.value
-	}
+	};
 	ref.push(data);
 	document.getElementById('inputLogin').value='';
 	document.getElementById('inputPassword').value='';
