@@ -29,7 +29,7 @@ function gotData(data){
 
 	}
 } 
-
+//Testing
 
 function submitData(){
 	if(inputPassword.value==''||inputLogin.value==''){
